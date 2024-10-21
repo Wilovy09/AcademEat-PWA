@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./dockerfile
+    container_name: academ_eat-backend
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./backend:/app
+    environment:
+      - NODE_ENV=development
+      - PORT=3333
+    depends_on:
+      - frontend
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./dockerfile
+    container_name: academ_eat-frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=production
+

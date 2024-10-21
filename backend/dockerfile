@@ -1,0 +1,21 @@
+# Backend: Construcción de AdonisJS (etapa 1)
+FROM node:18-alpine AS backend
+
+# Establecer el directorio de trabajo para el backend
+WORKDIR /app
+
+# Copiar archivos de configuración de backend
+COPY ./package*.json ./backend/
+
+# Instalar dependencias del backend
+RUN npm install --prefix ./backend
+
+# Copiar todo el código del backend
+COPY . .
+
+# Exponer el puerto de AdonisJS
+EXPOSE 3333
+
+# Comando para iniciar AdonisJS
+CMD ["npm", "run", "start", "--prefix", "./backend"]
+

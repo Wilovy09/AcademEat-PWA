@@ -1,0 +1,30 @@
+# Frontend: Construcción de Vue (etapa 1)
+FROM node:18-alpine AS frontend
+
+# Establecer el directorio de trabajo para el frontend
+WORKDIR /app
+
+# Copiar archivos de configuración de frontend
+COPY package*.json ./
+
+# Instalar dependencias del frontend
+RUN npm install
+
+# Copiar todo el código del frontend
+COPY . .
+
+# Construir la aplicación de Vue 3 para producción
+RUN npm run build
+
+# Servir la aplicación construida con Nginx
+FROM nginx:stable-alpine
+
+# Copiar la compilación del frontend a Nginx
+COPY --from=frontend /app/dist /usr/share/nginx/html
+
+# Exponer el puerto de Nginx
+EXPOSE 80
+
+# Comando para iniciar Nginx
+CMD ["nginx", "-g", "daemon off;"]
+

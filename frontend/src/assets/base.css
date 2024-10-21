@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.neumorphism-inner {
-  transition: all 0.3s;
-  box-shadow:
-    inset 4px 4px 8px #c4c4c4,
-    inset -4px -4px 8px #ffffff;
+:root {
+  --background: #f0f0f0;
+}
+
+body {
+  background-color: var(--background);
 }
 
 .gradient {

@@ -1,33 +1,33 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { HomeIcon, UserCircleIcon } from '@heroicons/vue/24/outline'
+import {
+  HomeIcon as HomeIconSolid,
+  UserCircleIcon as UserCircleIconSolid,
+} from '@heroicons/vue/24/solid'
 </script>
 
 <template>
   <nav
     class="text-gray-font border-gray-99 fixed bottom-0 z-40 flex h-16 w-full justify-between border-t bg-white px-6 py-2 shadow-lg"
   >
-    <RouterLink to="/">
+    <RouterLink :to="{ name: 'home' }" v-slot="{ isActive }">
       <span
         class="text-primary flex cursor-pointer flex-col items-center px-2 py-1 text-center text-sm hover:bg-gray-200 hover:text-gray-700"
       >
-        <i class="fas fa-home w-8 p-1"> </i>
+        <HomeIcon v-if="!isActive" class="w-8 h-8" />
+        <HomeIconSolid v-else class="w-8 h-8" />
         <span class="font-roboto mx-1">Home</span>
       </span>
     </RouterLink>
-    <RouterLink to="/">
+
+    <RouterLink :to="{ name: 'account' }" v-slot="{ isActive }">
       <span
         class="flex cursor-pointer flex-col items-center px-2 py-1 text-center text-sm hover:bg-gray-200 hover:text-gray-700"
       >
-        <i class="fas fa-envelope w-8 p-1"> </i>
-        <span class="font-roboto mx-1">Pesan</span>
-      </span>
-    </RouterLink>
-    <RouterLink to="/">
-      <span
-        class="flex cursor-pointer flex-col items-center px-2 py-1 text-center text-sm hover:bg-gray-200 hover:text-gray-700"
-      >
-        <i class="fas fa-user-circle w-8 p-1"> </i>
-        <span class="font-roboto mx-1">Akun</span>
+        <UserCircleIcon v-if="!isActive" class="w-8 h-8" />
+        <UserCircleIconSolid v-else class="w-8 h-8" />
+        <span class="font-roboto mx-1">Profile</span>
       </span>
     </RouterLink>
   </nav>

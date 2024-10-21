@@ -33,13 +33,26 @@ async function login() {
       showErrorToast(e as string)
     }
   } else {
-    // SignUp
-    if (password.value !== confirmPassword.value) {
-      showErrorToast('Passwords do not match')
-      return
+    try {
+      // SignUp
+      if (password.value !== confirmPassword.value) {
+        showErrorToast('Passwords do not match')
+        return
+      }
+      const result = await auth.register({
+        email: email.value,
+        password: password.value,
+      })
+      if (result.errors) {
+        for (const error of result.errors) {
+          showErrorToast(error.message)
+        }
+        return
+      }
+      router.push({ name: 'home' })
+    } catch (e: unknown) {
+      showErrorToast(e as string)
     }
-    await auth.register({ email: email.value, password: password.value })
-    router.push({ name: 'home' })
   }
 }
 </script>

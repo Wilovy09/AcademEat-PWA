@@ -76,16 +76,18 @@ async function login() {
         type="password"
       />
       <div class="grid gap-2">
-        <button type="submit" class="bg-blue-500 p-4 rounded-lg">
+        <button
+          type="submit"
+          class="bg-blue-500 p-4 rounded-lg hover:bg-blue-600 hover:text-white transition-all"
+        >
           {{ !isSignUp ? 'Login' : 'Create account' }}
         </button>
-        <button
+        <p
           @click="isSignUp = isSignUp ? false : true"
-          type="button"
-          class="hover:underline"
+          class="mt-2 text-center cursor-pointer hover:underline"
         >
           {{ !isSignUp ? "Don't have account?" : 'I have account' }}
-        </button>
+        </p>
       </div>
     </form>
   </main>

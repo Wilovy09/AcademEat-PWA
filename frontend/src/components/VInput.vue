@@ -14,8 +14,6 @@ defineEmits<{
 }>()
 
 const isPassword = ref(props.type === 'password')
-const showEye = props.hasEye && props.type === 'password'
-
 const togglePasswordVisibility = () => {
   isPassword.value = !isPassword.value
 }
@@ -41,13 +39,13 @@ const togglePasswordVisibility = () => {
         class="bg-white py-3 px-4 block w-full border border-blue-800 rounded-md text-sm focus:outline-none focus:border-blue-600 focus:border-2 transition-colors duration-300"
       />
       <button
-        v-if="showEye"
-        type="button"
+        v-if="props.type === 'password' && props.hasEye"
         @click="togglePasswordVisibility"
+        type="button"
         class="-ml-8 flex items-center"
       >
-        <EyeIcon v-if="!isPassword" class="w-6 h-6" />
-        <EyeSlashIcon v-if="isPassword" class="w-6 h-6" />
+        <EyeSlashIcon v-if="isPassword" class="w-6 h-6 text-black" />
+        <EyeIcon v-if="!isPassword" class="w-6 h-6 text-black" />
       </button>
     </div>
   </div>

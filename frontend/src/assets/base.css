@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.neumorphism-inner {
+  transition: all 0.3s;
+  box-shadow:
+    inset 4px 4px 8px #c4c4c4,
+    inset -4px -4px 8px #ffffff;
+}
+
+.gradient {
+  background: rgb(3, 103, 178);
+  background: linear-gradient(
+    0deg,
+    rgba(3, 103, 178, 1) 50%,
+    rgba(2, 147, 214, 1) 100%
+  );
+}

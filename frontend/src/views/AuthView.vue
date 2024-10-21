@@ -55,7 +55,7 @@ async function login() {
       :class="isSignUp ? 'mt-6' : 'mt-12'"
     >
       <VInput v-model="email" labelText="Email" type="email" />
-      <VInput v-model="password" labelText="password" type="password" />
+      <VInput v-model="password" hasEye labelText="password" type="password" />
       <VInput
         v-if="isSignUp"
         v-model="confirmPassword"

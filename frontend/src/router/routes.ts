@@ -7,6 +7,7 @@ export const routes = [
   {
     path: '/',
     name: 'home-layout',
+    meta: { requiresAuth: true },
     component: () => import('@/layouts/MainLayout.vue'),
     children: [
       {

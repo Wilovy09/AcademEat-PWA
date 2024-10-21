@@ -29,8 +29,8 @@ async function login() {
         return
       }
       router.push({ name: 'home' })
-    } catch (e) {
-      showErrorToast(e)
+    } catch (e: unknown) {
+      showErrorToast(e as string)
     }
   } else {
     // SignUp

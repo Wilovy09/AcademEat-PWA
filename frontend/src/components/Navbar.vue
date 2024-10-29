@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { HomeIcon, UserCircleIcon, BuildingStorefrontIcon } from '@heroicons/vue/24/outline'
 import {
@@ -6,6 +7,16 @@ import {
   UserCircleIcon as UserCircleIconSolid,
 BuildingStorefrontIcon as BuildingStorefrontIconSolid
 } from '@heroicons/vue/24/solid'
+
+const me = ref()
+const isSeller = ref(false)
+
+onMounted(async () => {
+  me.value = await auth.me()
+  if(me.value.isSeller === 'true'){
+    isSeller.value = true
+  }
+})
 </script>
 
 <template>
@@ -21,7 +32,7 @@ BuildingStorefrontIcon as BuildingStorefrontIconSolid
       </span>
     </RouterLink>
 
-    <RouterLink :to="{ name: 'my-store' }" v-slot="{ isActive }">
+    <RouterLink v-if="isSeller" :to="{ name: 'my-store' }" v-slot="{ isActive }">
       <span
         class="flex cursor-pointer flex-col items-center px-2 py-1 text-center text-sm hover:bg-gray-200 hover:text-gray-700"
       >

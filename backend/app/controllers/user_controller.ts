@@ -15,7 +15,7 @@ export default class UserController {
         return response.notFound({ message: 'User not found' })
       }
 
-      if (isSeller !== 'false' && isSeller !== 'true' && isSeller !== null) {
+      if (isSeller !== 'false' && isSeller !== 'true' && isSeller !== undefined) {
         return response.badRequest({ message: 'isSeller must to be "false" or "true"' })
       }
 

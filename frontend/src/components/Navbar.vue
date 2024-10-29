@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { HomeIcon, UserCircleIcon } from '@heroicons/vue/24/outline'
+import { HomeIcon, UserCircleIcon, BuildingStorefrontIcon } from '@heroicons/vue/24/outline'
 import {
   HomeIcon as HomeIconSolid,
   UserCircleIcon as UserCircleIconSolid,
+BuildingStorefrontIcon as BuildingStorefrontIconSolid
 } from '@heroicons/vue/24/solid'
 </script>
 
@@ -16,8 +17,16 @@ import {
         class="text-primary flex cursor-pointer flex-col items-center px-2 py-1 text-center text-sm hover:bg-gray-200 hover:text-gray-700"
       >
         <HomeIcon v-if="!isActive" class="w-8 h-8" />
-        <HomeIconSolid v-else class="w-8 h-8" />
-        <span class="font-roboto mx-1">Home</span>
+        <HomeIconSolid v-else class="w-8 h-8 text-blue-500" />
+      </span>
+    </RouterLink>
+
+    <RouterLink :to="{ name: 'my-store' }" v-slot="{ isActive }">
+      <span
+        class="flex cursor-pointer flex-col items-center px-2 py-1 text-center text-sm hover:bg-gray-200 hover:text-gray-700"
+      >
+        <BuildingStorefrontIcon v-if="!isActive" class="w-8 h-8" />
+        <BuildingStorefrontIconSolid v-else class="w-8 h-8 text-blue-500" />
       </span>
     </RouterLink>
 
@@ -26,8 +35,7 @@ import {
         class="flex cursor-pointer flex-col items-center px-2 py-1 text-center text-sm hover:bg-gray-200 hover:text-gray-700"
       >
         <UserCircleIcon v-if="!isActive" class="w-8 h-8" />
-        <UserCircleIconSolid v-else class="w-8 h-8" />
-        <span class="font-roboto mx-1">Profile</span>
+        <UserCircleIconSolid v-else class="w-8 h-8 text-blue-500" />
       </span>
     </RouterLink>
   </nav>

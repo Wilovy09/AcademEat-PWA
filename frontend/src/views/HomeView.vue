@@ -1,16 +1,13 @@
-<script setup lang="ts">
-import { useAuthStore } from '@/stores/auth'
-import { useRouter } from 'vue-router'
-
-const auth = useAuthStore()
-const router = useRouter()
-
-async function logout() {
-  auth.logout()
-  router.push({ name: 'auth' })
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <button @click="logout" type="button">Logout</button>
+  <div class="mt-8 flex justify-center mx-4">
+    <input type="text" placeholder="Pizza..." class="p-2 rounded-lg w-full" />
+  </div>
+
+  <p class="ml-4 mt-4">Destacados</p>
+  <div class="flex justify-center mx-4 mt-4"></div>
+
+  <p class="ml-4 mt-4">Ofertas</p>
+  <div class="flex justify-center mx-4 mt-4"></div>
 </template>

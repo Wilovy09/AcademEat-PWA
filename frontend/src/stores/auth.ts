@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function me() {
     const result = await api('GET', '/me')
-    user.value = result.me
+    user.value = result.user
     return user.value
   }
 

@@ -18,6 +18,12 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare fullName: string | null
 
   @column()
+  declare isSeller: 'false' | 'true'
+
+  @column()
+  declare profileImage: string | null
+
+  @column()
   declare email: string
 
   @column({ serializeAs: null })
@@ -31,3 +37,4 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 }
+

@@ -3,7 +3,6 @@ import { ref, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
 import { api } from '@/services/api'
-import { convertImgToBase64 } from '@/utils/convertImgToBase64'
 import {
   UserCircleIcon as UserCircleIconSolid,
   PencilSquareIcon as PencilSquareIconSolid,
@@ -26,17 +25,10 @@ async function logout() {
 
 async function saveChanges() {
   try {
-    if (profileImage.value) {
-      // TODO:
-      const base64String = await convertImgToBase64(profileImage.value)
-      console.log(base64String)
-    }
-    const oldFullName = fullName.value
-    if (oldFullName !== fullName.value) {
-      await api('POST', '/update-user', {
-        fullName: fullName.value,
-      })
-    }
+    const response = await api('POST', '/update-user', {
+      fullName: fullName.value,
+    })
+    console.log(response)
   } catch (error) {
     console.log(error)
   } finally {

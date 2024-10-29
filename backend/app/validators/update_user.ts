@@ -1,9 +1,9 @@
 import vine from '@vinejs/vine'
 
-export const registerValidator = vine.compile(
+export const updateUserValidator = vine.compile(
   vine.object({
-    full_name: vine.string().optional(),
-    profile_image: vine.string().optional(),
-    is_seller: vine.string().optional(),
+    fullName: vine.string().optional(),
+    profileImage: vine.string().optional(),
+    isSeller: vine.string().optional(),
   })
 )

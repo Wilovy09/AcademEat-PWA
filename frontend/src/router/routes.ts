@@ -25,6 +25,11 @@ export const routes = [
         name: 'account',
         component: () => import('@/views/AccountView.vue'),
       },
+      {
+        path: 'create-store',
+        name: 'create-store',
+        component: () => import('@/views/SellerFormView.vue'),
+      },
     ],
   },
 ]

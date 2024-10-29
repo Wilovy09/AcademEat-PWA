@@ -1,3 +1,4 @@
+import Store from '#models/store'
 import User from '#models/user'
 import { updateUserValidator } from '#validators/update_user'
 import type { HttpContext } from '@adonisjs/core/http'
@@ -29,6 +30,23 @@ export default class UserController {
     } catch (error) {
       console.error(error)
       return response.badRequest({ message: 'Error updating user', error: error.message })
+    }
+  }
+
+  async findStore({ auth, response }: HttpContext) {
+    try {
+      const user = await auth.authenticate() // Autenticar al usuario
+
+      const store = await Store.findBy('owner_id', user.id) // Suponiendo que el campo en la tabla 'stores' es 'owner_id'
+
+      if (!store) {
+        return response.status(404).json({ message: 'Store not found for this user' })
+      }
+
+      return response.status(200).json(store) // Devolver la tienda encontrada
+    } catch (error) {
+      console.error(error)
+      return response.status(500).json({ message: 'Error retrieving store', error: error.message })
     }
   }
 }

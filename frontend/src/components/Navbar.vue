@@ -7,6 +7,9 @@ import {
   UserCircleIcon as UserCircleIconSolid,
 BuildingStorefrontIcon as BuildingStorefrontIconSolid
 } from '@heroicons/vue/24/solid'
+import { useAuthStore } from '@/stores/auth'
+
+const auth = useAuthStore()
 
 const me = ref()
 const isSeller = ref(false)

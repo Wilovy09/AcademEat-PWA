@@ -15,6 +15,7 @@ const auth = useAuthStore()
 const router = useRouter()
 
 const me = ref()
+const isSeller = ref()
 const email = ref()
 const fullName = ref()
 const profileImage = ref<File | null>(null)
@@ -36,7 +37,7 @@ async function handleFileChange(event: Event) {
 
 async function saveChanges() {
   try {
-    const result = await api('POST', '/update-user', {
+    const result = await api('POST', '/user/update', {
       fullName: fullName.value,
       profileImage: profileImageBase64.value,
     })
@@ -50,8 +51,17 @@ async function saveChanges() {
   }
 }
 
+async function openStore() {
+  if (me.value.isSeller === 'true') {
+    showSuccesToast('You already have a store')
+    return
+  }
+  router.push({ name: 'create-store' })
+}
+
 onMounted(async () => {
   me.value = await auth.me()
+  isSeller.value = me.value.isSeller
   email.value = me.value.email
   profileImageBase64.value = me.value.profileImage
   if (me.value.fullName != '') {
@@ -82,8 +92,9 @@ onMounted(async () => {
       </p>
     </section>
     <div class="grid my-3 gap-3">
-      <button class="p-2 bg-blue-500 text-white rounded-lg mx-4">
-        I wanna be seller
+      <button :disabled="isSeller === 'true'" @click="openStore"
+        class="p-2 bg-blue-500 text-white rounded-lg mx-4 disabled:bg-gray-300 disabled:text-black">
+        {{ isSeller === 'true' ? 'You have a store' : 'I wanna be seller' }}
       </button>
       <button @click="logout" class="p-2 bg-red-500 text-white rounded-lg mx-4">
         Logout

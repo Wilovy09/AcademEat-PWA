@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { api } from '@/services/api'
+
+const stores = ref()
 
 const destacados = [
   {
@@ -39,50 +42,9 @@ const destacados = [
   },
 ]
 
-const ofertas = [
-  {
-    image: "#",
-    price: 12,
-    name: "Poll@",
-    href: "#"
-  },
-  {
-    image: "#",
-    price: 9,
-    name: "Poll@",
-    href: "#"
-  },
-  {
-    image: "#",
-    price: 10.5,
-    name: "Poll@",
-    href: "#"
-  },
-  {
-    image: "#",
-    price: 20,
-    name: "Poll@",
-    href: "#"
-  },
-  {
-    image: "#",
-    price: 19,
-    name: "Poll@",
-    href: "#"
-  },
-  {
-    image: "#",
-    price: 12,
-    name: "Poll@",
-    href: "#"
-  },
-  {
-    image: "#",
-    price: 12,
-    name: "Poll@",
-    href: "#"
-  },
-]
+onMounted(async () => {
+  stores.value = await api("GET", "/store")
+})
 </script>
 
 <template>
@@ -92,51 +54,20 @@ const ofertas = [
 
   <p class="ml-4 mt-4">Destacados</p>
   <div class="flex mx-4 mt-4 gap-6 overflow-x-auto">
-    <a
-      v-for="(destacado, index) in destacados"
-      :key="index"
-      :href="destacado.href"
-      class="flex bg-white shadow-lg rounded-lg min-w-fit overflow-hidden"
-    >
+    <a v-for="(destacado, index) in destacados" :key="index" :href="destacado.href"
+      class="flex bg-white shadow-lg rounded-lg min-w-fit overflow-hidden">
       <img :src="destacado.image" class="w-12" />
       <span class="p-4 font-bold"> {{ destacado.title }} </span>
     </a>
   </div>
 
-  <p class="ml-4 mt-4">Ofertas</p>
-  <div class="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-6 mx-4 mt-4">
-    <a
-      v-for="(oferta, index) in ofertas"
-      :key="index"
-      :href="oferta.href"
-      class="p-2 max-w-screen flex flex-col gap-2 bg-white shadow-lg rounded-lg overflow-hidden"
-    >
-      <div class="flex gap-4 justify-between">
-        <img
-          :src="oferta.image"
-          class="w-24 rounded-xl shadow-lg"
-        />
-
-        <div class="max-w-[200px] w-full grid grid-rows-2">
-          <span class="text-xl font-bold grid place-items-center"> ${{ oferta.price.toFixed(2) }} </span>
-
-          <div class="w-full grid grid-cols-3 justify-self-center">
-            <button class="bg-blue-500 text-white rounded-l-lg p-3">-</button>
-
-            <span class="bg-blue-500 text-white p-3 grid place-items-center">
-              0
-            </span>
-
-            <button class="bg-blue-500 text-white rounded-r-lg p-3">+</button>
-          </div>
-        </div>
-      </div>
-
-      <span
-        class="col-span-5 pl-5 text-lg font-bold"
-      >
-        {{ oferta.name }}
-      </span>
-    </a>
+  <p class="ml-4 mt-4">Stores</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-4 mt-4">
+    <div v-for="(store) in stores" :key="store.id" class="bg-white shadow-lg rounded-lg overflow-hidden p-4">
+      <img :src="store.portraitImage" alt="Store Image" class="w-full h-32 object-cover rounded-md mb-4" />
+      <h3 class="font-bold text-lg">{{ store.name }}</h3>
+      <p class="text-gray-600">{{ store.description }}</p>
+      <span class="text-sm text-gray-500">{{ store.category }}</span>
+    </div>
   </div>
 </template>

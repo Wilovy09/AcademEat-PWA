@@ -3,33 +3,38 @@ import { ref } from 'vue'
 
 const destacados = [
   {
-    image: '@/assets/images/fallback_profile_image.png',
+    image: 'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/FastFood_CuisineCarousel@2x.png',
+    title: 'Fast Food',
+    href: '#',
+  },
+  {
+    image: 'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Breakfast_CuisineCarousel@2x.png',
+    title: 'Breakfast',
+    href: '#',
+  },
+  {
+    image: 'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/American_CuisineCarousel@2x.png',
+    title: 'American',
+    href: '#',
+  },
+  {
+    image: 'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Healthy_CuisineCarousel@2x.png',
+    title: 'Healthy',
+    href: '#',
+  },
+  {
+    image: 'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/ComfortFood_CuisineCarousel@2x.png',
+    title: 'Comfort',
+    href: '#',
+  },
+  {
+    image: 'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Bakery_CuisineCarousel@2x.png',
+    title: 'Bakery',
+    href: '#',
+  },
+  {
+    image: 'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Pizza_CuisineCarousel@2x.png',
     title: 'Pizza',
-    href: '#',
-  },
-  {
-    image: '@/assets/images/fallback_profile_image.png',
-    title: 'Hamburguer',
-    href: '#',
-  },
-  {
-    image: '@/assets/images/fallback_profile_image.png',
-    title: 'Malteada',
-    href: '#',
-  },
-  {
-    image: '@/assets/images/fallback_profile_image.png',
-    title: 'Pizza',
-    href: '#',
-  },
-  {
-    image: '@/assets/images/fallback_profile_image.png',
-    title: 'Hamburguer',
-    href: '#',
-  },
-  {
-    image: '@/assets/images/fallback_profile_image.png',
-    title: 'Malteada',
     href: '#',
   },
 ]

@@ -10,3 +10,12 @@ export const createStoreValidator = vine.compile(
     storeImage: vine.string().optional(),
   })
 )
+
+export const editStoreValidator = vine.compile(
+  vine.object({
+    name: vine.string().optional(),
+    description: vine.string().optional(),
+    portraitImage: vine.string().optional(),
+    storeImage: vine.string().optional(),
+  })
+)

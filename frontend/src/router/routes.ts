@@ -21,6 +21,11 @@ export const routes = [
         component: () => import('@/views/MyStoreView.vue'),
       },
       {
+        path: 'store/:id',
+        name: 'store',
+        component: () => import('@/views/MyStoreView.vue'),
+      },
+      {
         path: 'account',
         name: 'account',
         component: () => import('@/views/AccountView.vue'),

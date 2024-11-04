@@ -39,6 +39,8 @@ router
   .group(() => {
     router.post('/create', [StoreController, 'create']).as('create')
     router.get('/:id', [StoreController, 'find']).as('find')
+    router.delete('/:id', [StoreController, 'delete']).as('delete')
+    router.put('/:id', [StoreController, 'edit']).as('edit')
     router.get('/', [StoreController, 'get']).as('get')
   })
   .prefix('/store')

@@ -71,7 +71,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="h-[calc(100vh-4rem)] flex flex-col justify-between">
+  <h1 class="text-blue-500 text-center text-3xl font-bold mt-4">AcademEat</h1>
+  <main class="h-[calc(100vh-7rem)] flex flex-col justify-between">
     <section>
       <div class="flex justify-center mt-4">
         <UserCircleIconSolid v-if="!profileImageBase64" class="w-36 h-36" />

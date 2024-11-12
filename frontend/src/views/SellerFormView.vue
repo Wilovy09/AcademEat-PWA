@@ -6,6 +6,7 @@ import { api } from '@/services/api'
 import { fileToBase64 } from '@/utils/convertImgToBase64'
 import VInput from '@/components/VInput.vue'
 import { showSuccesToast } from '@/helpers/swalFunctions'
+import { categories } from '@/const/consts'
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -122,11 +123,9 @@ onMounted(async () => {
           v-model="storeCategory"
           class="p-3 border-blue-700 border-[1px] rounded-lg bg-white w-full text-black"
         >
-          <option value="Tecnologia" selected>Tecnologia</option>
-          <option value="Pizza">Pizza</option>
-          <option value="Sushi">Sushi</option>
-          <option value="Hamburgesas">Hamburgesas</option>
-          <option value="Tacos">Tacos</option>
+          <option v-for="cat in categories" :key="cat.value" :value="cat.value">
+            {{ cat.name }}
+          </option>
         </select>
       </label>
     </div>

@@ -35,6 +35,16 @@ export const routes = [
         name: 'create-store',
         component: () => import('@/views/SellerFormView.vue'),
       },
+      {
+        path: '/:storeId/add-product',
+        name: 'add-product',
+        component: () => import('@/views/ProductForm.vue'),
+      },
+      {
+        path: '/product/:productId',
+        name: 'view-product',
+        component: () => import('@/views/FindProductView.vue'),
+      },
     ],
   },
 ]

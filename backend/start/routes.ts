@@ -2,6 +2,7 @@ import router from '@adonisjs/core/services/router'
 const AuthController = () => import('#controllers/auth_controller')
 const UserController = () => import('#controllers/user_controller')
 const StoreController = () => import('#controllers/store_controller')
+const ProductController = () => import('#controllers/product_controller')
 
 router.get('/', async () => {
   return {
@@ -45,3 +46,18 @@ router
   })
   .prefix('/store')
   .as('store')
+/*
+|--------------------------------------------------------------------------
+| Product routes
+|--------------------------------------------------------------------------
+*/
+router
+  .group(() => {
+    router.get('/', [ProductController, 'get'])
+    router.get('/:id', [ProductController, 'find'])
+    router.get('/store/:storeId', [ProductController, 'getProducts'])
+    router.post('/', [ProductController, 'create'])
+    router.delete('/:id', [ProductController, 'delete'])
+    router.put('/:id', [ProductController, 'update'])
+  })
+  .prefix('/products')

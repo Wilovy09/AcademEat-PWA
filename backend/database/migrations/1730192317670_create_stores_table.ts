@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.integer('owner_id').references('id').inTable('users').unique()
       table.string('name', 254).unique()
       table.string('description')
-      table.string('category').unique()
+      table.string('category')
       table.string('portrait_image')
       table.string('store_image')
 

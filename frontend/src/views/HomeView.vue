@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { api } from '@/services/api'
 import { categories } from '@/const/consts';
+import { truncateText } from '@/helpers/truncateText'
 
 const stores = ref()
 const products = ref()
@@ -66,7 +67,9 @@ onMounted(async () => {
           {{ product.name }}
         </h3>
         <p class="text-sm text-gray-600 mb-2">{{ product.category }}</p>
-        <p class="text-gray-700 text-base mb-4">{{ product.description }}</p>
+        <p class="text-gray-700 text-base mb-4">
+          {{ truncateText(product.description, 80) }}
+        </p>
       </div>
 
       <div class="px-4 py-2 flex justify-between items-center">

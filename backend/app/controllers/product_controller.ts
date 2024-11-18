@@ -83,7 +83,59 @@ export default class ProductController {
     }
   }
 
-  async delete({}: HttpContext) {}
+  async delete({ response, params }: HttpContext) {
+    const { id } = params
+    try {
+      const product = await Product.find(id)
+      if (!product) {
+        return response.status(404).json({
+          message: 'Product not found',
+        })
+      }
 
-  async update({}: HttpContext) {}
+      await product.delete()
+      return response.status(200).json({
+        message: 'Product deleted successfully',
+      })
+    } catch (e) {
+      return response.status(500).json({
+        message: 'Error deleting product',
+        error: e.message,
+      })
+    }
+  }
+
+  async update({ request, response, params }: HttpContext) {
+    const { id } = params
+    try {
+      const product = await Product.find(id)
+      if (!product) {
+        return response.status(404).json({
+          message: 'Product not found',
+        })
+      }
+
+      const { name, description, category, price, stock, image } = request.only([
+        'name',
+        'description',
+        'category',
+        'price',
+        'stock',
+        'image',
+      ])
+
+      product.merge({ name, description, category, price, stock, image })
+      await product.save()
+
+      return response.status(200).json({
+        message: 'Product updated successfully',
+        product,
+      })
+    } catch (e) {
+      return response.status(400).json({
+        message: 'Error updating product',
+        error: e.message,
+      })
+    }
+  }
 }

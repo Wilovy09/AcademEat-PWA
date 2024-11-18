@@ -46,6 +46,11 @@ export const routes = [
         component: () => import('@/views/FindProductView.vue'),
       },
       {
+        path: '/:storeId/edit-product/:productId',
+        name: 'edit-product',
+        component: () => import('@/views/EditProductView.vue'),
+      },
+      {        
         path: '/products/categories/:category',
         name: 'view-category',
         component: () => import('@/views/ProductsByCategoryView.vue'),

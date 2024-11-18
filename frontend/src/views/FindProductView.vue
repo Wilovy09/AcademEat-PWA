@@ -15,13 +15,20 @@ const store = ref()
 const isOwner = ref(false)
 
 const showMenu = ref(false)
-const isEditing = ref(false)
 
 async function deleteProduct() {
   try {
     await api('DELETE', `/products/${product.value.id}`)
     router.push({ name: 'my-store' })
     showSuccesToast('Produc deleted')
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+async function editProduct() {
+  try {
+    router.push(`/${store.value.id}/edit-product/${product.value.id}`)
   } catch (e) {
     console.log(e)
   }
@@ -53,7 +60,7 @@ onMounted(async () => {
       >
         <AdjustmentsHorizontalIcon class="w-6 h-6" />
         <div v-if="showMenu" class="mr-6 text-end">
-          <button @click="isEditing = true" class="p-1">Edit</button>
+          <button @click="editProduct" class="p-1">Edit</button>
           <button @click="deleteProduct" class="p-1">Delete</button>
         </div>
       </div>

@@ -55,6 +55,7 @@ router
   .group(() => {
     router.get('/', [ProductController, 'get'])
     router.get('/:id', [ProductController, 'find'])
+    router.get('/categories/:category', [ProductController, 'getByCategory'])
     router.get('/store/:storeId', [ProductController, 'getProducts'])
     router.post('/', [ProductController, 'create'])
     router.delete('/:id', [ProductController, 'delete'])

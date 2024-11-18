@@ -9,6 +9,7 @@ import { categories } from '@/const/consts'
 import { useRoute, useRouter } from 'vue-router'
 
 let storeId: number
+let productId: number | null = null
 
 const router = useRouter()
 
@@ -31,9 +32,11 @@ async function handleFileChange(event: Event) {
   }
 }
 
-async function createProduct() {
+async function updateProduct() {
+  if (!productId) return
+
   try {
-    const response = await api('POST', '/products', {
+    const response = await api('PUT', `/products/${productId}`, {
       storeId: storeId,
       name: name.value,
       description: description.value,
@@ -43,15 +46,31 @@ async function createProduct() {
       image: imageBase64.value,
     })
     console.log(response)
-    showSuccesToast('Product created')
+    showSuccesToast('Product updated')
   } catch (error) {
     console.error(error)
   } finally {
     router.push({ name: 'my-store' })
   }
 }
-onMounted(() => {
+
+onMounted(async () => {
   storeId = Number(useRoute().params.storeId)
+  const routeProductId = useRoute().params.productId
+
+  if (routeProductId) {
+    productId = Number(routeProductId)
+    const product = await api('GET', `/products/${productId}`)
+    name.value = product.name
+    description.value = product.description
+    price.value = product.price
+    inventory.value = product.stock
+    category.value = product.category
+    imageBase64.value = product.image
+  } else {
+    // Redirigir o mostrar un mensaje si no se encuentra un `productId`
+    console.error('No product ID provided for editing')
+  }
 })
 </script>
 
@@ -64,7 +83,7 @@ onMounted(() => {
     />
   </div>
   <main class="m-4">
-    <form @submit.prevent="createProduct" class="flex flex-col gap-4">
+    <form @submit.prevent="updateProduct" class="flex flex-col gap-4">
       <label v-show="showSelectImage">
         Product image
         <input
@@ -99,7 +118,7 @@ onMounted(() => {
         </select>
       </label>
       <button class="w-full bg-blue-500 text-white p-2 rounded-lg">
-        Create product
+        Update product
       </button>
     </form>
   </main>

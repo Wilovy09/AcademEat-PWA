@@ -15,6 +15,19 @@ export default class ProductController {
     }
   }
 
+  async getByCategory({ response, params }: HttpContext) {
+    try {
+      const { category } = params
+      const products = await Product.query().where('category', category)
+      return response.status(200).json(products)
+    } catch (error) {
+      return response.status(500).json({
+        message: 'Error fetching products',
+        error: error.message,
+      })
+    }
+  }
+
   async getProducts({ response, params }: HttpContext) {
     try {
       const { storeId } = params

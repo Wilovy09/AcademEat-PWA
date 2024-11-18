@@ -1,8 +1,8 @@
 export const categories = [
-  { value: 'Tecnologia', name: 'Tecnologia' },
-  { value: 'Pizza', name: 'Pizza' },
-  { value: 'Sushi', name: 'Sushi' },
-  { value: 'Hamburgesas', name: 'Hamburgesas' },
-  { value: 'Empanadas', name: 'Empanadas' },
-  { value: 'Tacos', name: 'Tacos' },
+  { value: 'tecnologia', name: 'Tecnologia' },
+  { value: 'pizza', name: 'Pizza' },
+  { value: 'sushi', name: 'Sushi' },
+  { value: 'hamburgesas', name: 'Hamburgesas' },
+  { value: 'empanadas', name: 'Empanadas' },
+  { value: 'tacos', name: 'Tacos' },
 ]

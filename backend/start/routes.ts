@@ -43,6 +43,7 @@ router
     router.delete('/:id', [StoreController, 'delete']).as('delete')
     router.put('/:id', [StoreController, 'edit']).as('edit')
     router.get('/', [StoreController, 'get']).as('get')
+    router.get('/:name', [StoreController, 'findByName']).as('getByName')
   })
   .prefix('/store')
   .as('store')

@@ -3,10 +3,30 @@ import { ref, onMounted } from 'vue'
 import { api } from '@/services/api'
 import { categories } from '@/const/consts'
 import { truncateText } from '@/helpers/truncateText'
+import { useRouter } from 'vue-router'
+import { showErrorToast } from '@/helpers/swalFunctions'
 
-const stores = ref()
-const products = ref()
-const destacados = categories // Ya tienen las imágenes
+const stores = ref<any[]>([])
+const products = ref<any[]>([])
+const destacados = categories
+
+const findStoreText = ref('')
+
+const router = useRouter()
+
+async function findStore() {
+  if (findStoreText.value.trim()) {
+    const store = stores.value.find(store =>
+      store.name.toLowerCase().includes(findStoreText.value.toLowerCase()),
+    )
+
+    if (store) {
+      router.push(`/store/${store.id}`)
+    } else {
+      showErrorToast('Tienda no encontrada')
+    }
+  }
+}
 
 onMounted(async () => {
   stores.value = await api('GET', '/store')
@@ -17,7 +37,13 @@ onMounted(async () => {
 <template>
   <h1 class="text-blue-500 text-center text-3xl font-bold mt-4">AcademEat</h1>
   <div class="mt-4 flex justify-center mx-4">
-    <input type="text" placeholder="Pizza..." class="p-2 rounded-lg w-full" />
+    <input
+      v-model="findStoreText"
+      @change="findStore"
+      type="text"
+      placeholder="Pizza..."
+      class="p-2 rounded-lg w-full"
+    />
   </div>
 
   <p class="ml-4 mt-4 text-xl font-bold">Categories</p>
@@ -53,7 +79,7 @@ onMounted(async () => {
         </h3>
         <p class="text-sm text-gray-600 mb-2">{{ product.category }}</p>
         <p class="text-gray-700 text-base mb-4">
-          {{ truncateText(product.description, 80) }}
+          {{ truncateText(product.description, 85) }}
         </p>
       </div>
 
@@ -85,7 +111,7 @@ onMounted(async () => {
         class="w-full h-32 object-cover rounded-md mb-4"
       />
       <h3 class="font-bold text-lg">{{ store.name }}</h3>
-      <p class="text-gray-600">{{ store.description }}</p>
+      <p class="text-gray-600">{{ truncateText(store.description, 85) }}</p>
       <span class="text-sm text-gray-500">{{ store.category }}</span>
     </a>
   </div>

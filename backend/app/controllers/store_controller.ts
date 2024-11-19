@@ -71,6 +71,31 @@ export default class StoreController {
     }
   }
 
+  async findByName({ params, response }: HttpContext) {
+    const { name } = params
+    try {
+      // Usa el operador like para hacer la búsqueda más flexible
+      const stores = await Store.query()
+        .where('name', 'like', `%${name}%`) // '%${name}%' permite buscar coincidencias parciales
+        .limit(1) // Limitamos a una tienda para obtener el resultado más relevante (opcional)
+        .orderBy('name', 'asc') // Puedes ordenar por relevancia o cualquier otro criterio
+
+      if (stores.length === 0) {
+        return response.status(404).json({
+          error: 'Store not found',
+        })
+      }
+
+      // Si hay múltiples resultados, puedes devolver el más relevante según algún criterio
+      return response.status(200).json(stores[0]) // Regresa la primera tienda encontrada
+    } catch (error) {
+      return response.status(500).json({
+        message: 'Error fetching store',
+        error: error.message,
+      })
+    }
+  }
+
   // Delete store by ID
   async delete({ params, response, auth }: HttpContext) {
     const { id } = params

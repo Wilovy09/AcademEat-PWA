@@ -2,31 +2,41 @@ export const categories = [
   {
     value: 'pizza',
     name: 'Pizza',
-    image:
-      'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Pizza_CuisineCarousel@2x.png',
+    image: '@/../public/icons/category/pizza.svg',
+  },
+  {
+    value: 'drink',
+    name: 'Drinks',
+    image: '@/../public/icons/category/drink.svg',
   },
   {
     value: 'sushi',
     name: 'Sushi',
-    image:
-      'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Breakfast_CuisineCarousel@2x.png',
+    image: '@/../public/icons/category/sushi.svg',
   },
   {
     value: 'hamburgesas',
     name: 'Hamburgesas',
-    image:
-      'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/American_CuisineCarousel@2x.png',
-  },
-  {
-    value: 'empanadas',
-    name: 'Empanadas',
-    image:
-      'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Healthy_CuisineCarousel@2x.png',
+    image: '@/../public/icons/category/hamburger.svg',
   },
   {
     value: 'tacos',
     name: 'Tacos',
-    image:
-      'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/ComfortFood_CuisineCarousel@2x.png',
+    image: '@/../public/icons/category/tacos.svg',
+  },
+]
+
+export const places = [
+  {
+    value: 'fime',
+    label: 'FIME',
+  },
+  {
+    value: 'facpya',
+    label: 'FACPYA',
+  },
+  {
+    value: 'fod',
+    label: 'FOD',
   },
 ]

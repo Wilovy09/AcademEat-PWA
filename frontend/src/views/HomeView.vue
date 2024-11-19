@@ -1,33 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { api } from '@/services/api'
-import { categories } from '@/const/consts';
+import { categories } from '@/const/consts'
 import { truncateText } from '@/helpers/truncateText'
 
 const stores = ref()
 const products = ref()
-
-const destacadosIcons = [
-  'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/FastFood_CuisineCarousel@2x.png',
-  'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Pizza_CuisineCarousel@2x.png',
-  'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Breakfast_CuisineCarousel@2x.png',
-  'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/American_CuisineCarousel@2x.png',
-  'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Healthy_CuisineCarousel@2x.png',
-  'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/ComfortFood_CuisineCarousel@2x.png',
-  'https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Bakery_CuisineCarousel@2x.png',
-]
-
-const destacados = categories.map((category, index) => ({
-  ...category,
-  image: destacadosIcons[index],
-}))
+const destacados = categories // Ya tienen las imágenes
 
 onMounted(async () => {
   stores.value = await api('GET', '/store')
   products.value = await api('GET', '/products')
 })
 </script>
-
 
 <template>
   <h1 class="text-blue-500 text-center text-3xl font-bold mt-4">AcademEat</h1>
@@ -89,7 +74,7 @@ onMounted(async () => {
   <p class="ml-4 mt-4 text-xl font-bold">Stores</p>
   <div class="flex gap-4 m-4 overflow-x-auto mb-20">
     <a
-      href="#"
+      :href="`/store/${store.id}`"
       v-for="store in stores"
       :key="store.id"
       class="bg-white shadow-lg min-w-[90%] rounded-lg p-4"

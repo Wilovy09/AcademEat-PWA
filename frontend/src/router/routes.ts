@@ -23,7 +23,7 @@ export const routes = [
       {
         path: 'store/:id',
         name: 'store',
-        component: () => import('@/views/MyStoreView.vue'),
+        component: () => import('@/views/StoreView.vue'),
       },
       {
         path: 'account',
@@ -50,7 +50,7 @@ export const routes = [
         name: 'edit-product',
         component: () => import('@/views/EditProductView.vue'),
       },
-      {        
+      {
         path: '/products/categories/:category',
         name: 'view-category',
         component: () => import('@/views/ProductsByCategoryView.vue'),
